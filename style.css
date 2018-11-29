@@ -1,0 +1,70 @@
+.body{
+    background-color: lightgray;
+    width: 100%
+
+}
+.todolist{
+    font-family: 'Pacifico', cursive; 
+
+}
+.container{
+    display: flex;
+    border: 1px solid grey;
+    height:90%;
+}
+.Title{
+    display: flex;
+    align-items: center;
+    border: 1px solid grey;
+    height: 8%;
+    padding: 7px;
+
+}
+.Title img{
+    height: 80%;
+
+}
+.Title div{
+    margin: auto;
+    font-size: 120%;
+}
+.todo{
+    width: 100%;
+    height: 69%;
+    border: 1px solid grey;
+    overflow: hidden;
+
+}
+.todo div{
+    font-size: 25px;
+}
+.done{
+    width: 100%;
+    height: 31%;
+    border: 1px solid grey;
+    overflow: hidden;
+}
+.tododone{
+    text-align: center;
+}
+.tododone span{
+/* font-family: 'Satisfy', cursive; */
+    font-family: 'Gloria Hallelujah', cursive;
+}
+        
+.todo input,.done input{
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom-style:dotted;
+    width: 75%;
+    padding-top: 10px;
+    outline: none;
+    font-family: 'Satisfy', cursive;
+    font-size: 20px;
+}
+input[type="checkbox"] {
+    width: 10%;
+    margin-left: -10%;
+
+}
