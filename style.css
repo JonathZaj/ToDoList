@@ -47,7 +47,7 @@
 }
 .tododone{
     text-align: center;
-    width: 15%;
+    width: 98%;
 
 }
 .tododone span{
@@ -69,4 +69,7 @@
 .add{
     position: absolute;
     right: 10px;
+}
+li{
+    list-style-type: none;
 }

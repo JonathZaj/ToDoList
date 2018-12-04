@@ -1,13 +1,24 @@
 class App extends React.Component {
     constructor(props) {
         super(props);
+        this.writeTask=this.writeTask.bind(this)
+        this.state = {
+            tasks: []
+        }
+    }
+    writeTask(update){
+        var updatedTasks = this.state.tasks;
+        updatedTasks.push(update);
+        this.setState({
+            tasks: updatedTasks
+        })
     }
     render() {
         return (
             <div className='todolist'>
-                <Title bgcolor='red' text='TO DO LIST' font='black' source='https://img.icons8.com/metro/1600/todo-list.png' />
+                <Title bgcolor='red' text='TO DO LIST' font='black' source='https://img.icons8.com/metro/1600/todo-list.png' updateList={this.writeTask}/>
                 <div className='container'>
-                    <List day='Sunday' length='25' /><List day='Monday' length='25' /><List day='Tuesday' length='25' /><List day='Wednesday' length='25' /><List day='Thursday' length='25' /><List day='Friday' length='25' /><List day='Saturday' length='25' />
+                    <List addedTask={this.state.tasks}/>
                 </div>
             </div>
         )
@@ -17,6 +28,16 @@ class App extends React.Component {
 class Title extends React.Component {
     constructor(props) {
         super(props);
+        this.add=this.add.bind(this)
+    }
+    add(){
+        var day = this.daySelect.value;   
+        var month = this.monthSelect.value;   
+        var year = this.yearSelect.value;   
+        var input = this.textInput.value;
+        var task = `${input} on ${day}.${month}.${year}`;
+        this.props.updateList(task);   
+
     }
     render() {
         var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -49,7 +70,7 @@ class Title extends React.Component {
                     <select ref={(select) => { this.yearSelect = select; }}>
                         {yearsDropdown}
                     </select>
-                    <button onClick={this.select}>Add</button><br />
+                    <button onClick={this.add}>Add</button><br />
                 </div>
             </div>
         )
@@ -60,7 +81,11 @@ class List extends React.Component {
     constructor(props) {
         super(props);
     }
+
     render() {
+        var list=this.props.addedTask.map(
+            x => <li key={`item${x}`}>{x}</li>
+        )
         return (
             <div className='tododone' >
                 <div className='todo'>
@@ -69,6 +94,9 @@ class List extends React.Component {
                     <span>Something for today?</span>
                     <br />
                     <br />
+                    <ul>
+                        {list}
+                    </ul>
                 </div>
                 <div className='done'>
                     <br />
