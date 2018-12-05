@@ -5,8 +5,8 @@
 }
 .todolist{
     font-family: 'Pacifico', cursive; 
-    background-image:url('https://progresser-en-informatique.com/wp-content/uploads/Aerial04.jpg');
-
+    background-image:url('https://www.youyouk.fr/wp-content/uploads/2010/01/Central-Park-NB.jpg');
+background-size:cover;
 }
 .container{
     display: flex;
@@ -24,7 +24,9 @@
 
 }
 .InputBar img{
-    height: 120%;
+    height: 98%;
+    border-radius: 20px;
+
 
 }
 .InputBar div{
@@ -40,6 +42,8 @@
 }
 .todo div{
     font-size: 25px;
+    margin-left: 20px;
+
 }
 .todo span{
     font-size: 25px;
@@ -47,9 +51,10 @@
 .done{
     width: 102%;
     height: 31%;
-    border: 1px solid grey;
+    border-top: 4px solid white;
     overflow: hidden;
     overflow: scroll;
+    
 }
 .tododone{
     text-align: center;
@@ -90,6 +95,9 @@ li{
     border-radius: 40px;
     font-size: 20px;
     margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
 }
 select{
@@ -100,9 +108,11 @@ select{
     margin-left: 3px;
 }
 input[type='checkbox']{
-    margin: 10px;
+    width: 10%;
+}
+.result{
+    flex-direction: row;
     width: 100%;
-    position: absolute;
-    left: 57px;
-    top: 211px;
+    display: flex;
+    justify-content: space-around;
 }

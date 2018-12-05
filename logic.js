@@ -5,7 +5,7 @@ class App extends React.Component {
     render() {
         return (
             <div className='todolist'>
-                <InputBar bgcolor='rgba(0,0,0,0.5)' text='TO DO LIST' font='white' source='http://chittagongit.com//images/todo-list-icon/todo-list-icon-18.jpg' />
+                <InputBar bgcolor='rgba(0,0,0,0.8)' text='MY TO DO LIST' font='white' source='https://image.shutterstock.com/image-illustration/todo-list-raster-pictogram-illustration-260nw-623169395.jpg' />
                 <div className='container'>
                     <List />
                 </div>
@@ -48,8 +48,10 @@ class List extends React.Component {
         var month = this.monthSelect.value;
         var year = this.yearSelect.value;
         var input = this.textInput.value;
-        var task = ` ${input} On ${day}.${month}.${year}`;
-        this.state.tasks.push(<li key={this.state.key + 1} className='list'><input type="checkbox"></input><div>{task}</div></li>)
+
+        var task = ` ${input}`     
+        var date= ` On ${day}.${month}.${year}`;
+        this.state.tasks.push(<li key={this.state.key + 1} className='list'><input type="checkbox"></input><div className='result'>{task}{date}</div></li>)
     }
     render() {
         var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -92,7 +94,6 @@ class List extends React.Component {
                 </div>
                 <div className='done'>
                     <br />
-                    <span>You made it !</span>
                     <br />
                 </div>
             </div>
