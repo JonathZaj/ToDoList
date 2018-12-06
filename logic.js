@@ -62,11 +62,28 @@ class List extends React.Component {
     constructor(props) {
         super(props);
         this.add = this.add.bind(this);
+        this.passToDone = this.passToDone.bind(this);
         this.state = {
             tasks: [],
+            doneTasks: [],
             key: 0
         }
     }
+    passToDone(e) {
+        var newDone = e.target.textContent;
+        e.target.parentElement.remove();
+        console.log(newDone)
+        this.setState({
+            doneTasks: this.state.doneTasks
+        })
+
+        this.state.doneTasks.push(
+            <li key={this.state.key + 1} className='list'>
+                <div className='result' >{newDone}</div>
+                <button className="trash-button"></button>
+            </li>)
+    }
+
     add() {
         this.setState({
             tasks: this.state.tasks,
@@ -82,9 +99,8 @@ class List extends React.Component {
         var date = ` On ${day}.${month}.${year}`;
         this.state.tasks.push(
             <li key={this.state.key + 1} className='list'>
-                <input type='checkbox'></input>
-                <div className='result'>{task}{date}</div>
-                <button className = "trash-button"></button>
+                <div onClick={this.passToDone} className='result'>{`${task}${date}`}</div>
+                <button className="trash-button"></button>
             </li>)
     }
     renderOption(arr) {
@@ -119,6 +135,9 @@ class List extends React.Component {
                 <div className='done'>
                     <br />
                     <br />
+                    <ul>
+                        {this.state.doneTasks}
+                    </ul>
                 </div>
             </div>
         )
