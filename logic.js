@@ -62,9 +62,24 @@ class List extends React.Component {
     constructor(props) {
         super(props);
         this.add = this.add.bind(this);
+        this.isChecked = this.isChecked.bind(this);
         this.state = {
             tasks: [],
-            key: 0
+            key: 0,
+            isChecked: false
+        }
+    }
+    isChecked(e) {
+        var checked = e.target.checked;
+        if (checked === true) {
+            this.setState({
+                isChecked: true
+            })
+        } else {
+            this.setState({
+                isChecked: false
+            })
+
         }
     }
     add() {
@@ -82,9 +97,9 @@ class List extends React.Component {
         var date = ` On ${day}.${month}.${year}`;
         this.state.tasks.push(
             <li key={this.state.key + 1} className='list'>
-                <input type='checkbox'></input>
+                <input type='checkbox' onChange={this.isChecked}></input>
                 <div className='result'>{task}{date}</div>
-                <button className = "trash-button"></button>
+                <button className="trash-button"></button>
             </li>)
     }
     renderOption(arr) {
@@ -113,12 +128,16 @@ class List extends React.Component {
                     </div>
                     <br />
                     <ul>
-                        {this.state.tasks}
+                        {(this.state.isChecked) ? false : this.state.tasks}
                     </ul>
                 </div>
                 <div className='done'>
+                    <h2>Ok... That's done !</h2>
                     <br />
                     <br />
+                    <ul>
+                        {(this.state.isChecked) ? this.state.tasks : false}
+                    </ul>
                 </div>
             </div>
         )
