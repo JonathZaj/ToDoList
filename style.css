@@ -35,7 +35,7 @@
 }
 .todo{
     width: 102%;
-    height: 55%;
+    height: 65%;
     border: 1px solid grey;
     overflow: scroll;
 
@@ -50,7 +50,7 @@
 }
 .done{
     width: 102%;
-    height: 45%;
+    height: 35%;
     border-top: 1px black;
     border-style: unset;
     overflow: scroll;
@@ -143,7 +143,8 @@ h2{
     margin: auto;
 }
 .modal{
-    border: 1px solid black;
+    border: 5px black;
+    border-style: dashed;
     background-color: red;
     width: 20%;
     height: 40%;

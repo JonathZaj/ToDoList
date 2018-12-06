@@ -56,7 +56,7 @@ class App extends React.Component {
             <div className='todolist'>
                 <NavBar bgcolor='rgba(0,0,0,0.8)' handleClick={this.modal} text='MY TO DO LIST' font='white' source='https://image.shutterstock.com/image-illustration/todo-list-raster-pictogram-illustration-260nw-623169395.jpg' source2='http://img.over-blog.com/231x300/3/89/36/53/point_d_interrogation-2bf4e1.png' />
                 <div className='container'>
-                    <List display={this.state.display} rules={`Hello guys,here how to use our To Do List:\n 1-Write a task in the bar, choose a date and click on the button'Add' \n2-If you want to put your task in the done list(or put back in the to do list), click on the task.\n 3-If you want to remove a task, click on the trash.`} />
+                    <List display={this.state.display} rules={`Hello guys,\nhere how to use our To Do List:\n 1-Write a task in the bar, choose a date and click on the button'Add' \n2-If you want to put your task in the done list(or put back in the to do list), click on the task.\n 3-If you want to remove a task, click on the trash.`} />
                 </div>
             </div>
         )
