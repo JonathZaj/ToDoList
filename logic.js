@@ -62,6 +62,7 @@ class List extends React.Component {
     constructor(props) {
         super(props);
         this.add = this.add.bind(this);
+<<<<<<< HEAD
         this.isChecked = this.isChecked.bind(this);
         this.state = {
             tasks: [],
@@ -80,8 +81,30 @@ class List extends React.Component {
                 isChecked: false
             })
 
+=======
+        this.passToDone = this.passToDone.bind(this);
+        this.state = {
+            tasks: [],
+            doneTasks: [],
+            key: 0
+>>>>>>> 918ae343128818ef378fa080cd4e2ce373d4dede
         }
     }
+    passToDone(e) {
+        var newDone = e.target.textContent;
+        e.target.parentElement.remove();
+        console.log(newDone)
+        this.setState({
+            doneTasks: this.state.doneTasks
+        })
+
+        this.state.doneTasks.push(
+            <li key={this.state.key + 1} className='list'>
+                <div className='result' >{newDone}</div>
+                <button className="trash-button"></button>
+            </li>)
+    }
+
     add() {
         this.setState({
             tasks: this.state.tasks,
@@ -97,8 +120,12 @@ class List extends React.Component {
         var date = ` On ${day}.${month}.${year}`;
         this.state.tasks.push(
             <li key={this.state.key + 1} className='list'>
+<<<<<<< HEAD
                 <input type='checkbox' onChange={this.isChecked}></input>
                 <div className='result'>{task}{date}</div>
+=======
+                <div onClick={this.passToDone} className='result'>{`${task}${date}`}</div>
+>>>>>>> 918ae343128818ef378fa080cd4e2ce373d4dede
                 <button className="trash-button"></button>
             </li>)
     }
@@ -136,7 +163,11 @@ class List extends React.Component {
                     <br />
                     <br />
                     <ul>
+<<<<<<< HEAD
                         {(this.state.isChecked) ? this.state.tasks : false}
+=======
+                        {this.state.doneTasks}
+>>>>>>> 918ae343128818ef378fa080cd4e2ce373d4dede
                     </ul>
                 </div>
             </div>
