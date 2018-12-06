@@ -64,6 +64,7 @@ background-size:cover;
 .tododone span{
     font-family: 'Gloria Hallelujah', cursive;
     font-size: 21px;
+    margin-right: 20px
 }
         
 .todo input,.done input{
@@ -106,13 +107,14 @@ select{
     height: 36px;
     width: 68px;
     margin-left: 3px;
+    border-radius: 30px;
 }
 input[type='checkbox']{
-    width: 10%;
+    width: 14px;
 }
 .result{
     flex-direction: row;
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
