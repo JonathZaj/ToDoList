@@ -63,6 +63,7 @@ class List extends React.Component {
         super(props);
         this.add = this.add.bind(this);
         this.passToDone = this.passToDone.bind(this);
+        this.passToDo = this.passToDo.bind(this);
         this.delete = this.delete.bind(this);
         this.state = {
             tasks: [],
@@ -77,7 +78,6 @@ class List extends React.Component {
     passToDo(e) {
         var newDo = e.target.textContent;
         e.target.parentElement.remove();
-        console.log(newDone)
         this.setState({
             tasks: this.state.tasks,
             key: this.state.key + 1
@@ -128,7 +128,7 @@ class List extends React.Component {
         var task = ` ${input}`
         this.state.tasks.push(
             <li key={this.state.key + 1} className='list'>
-                <div onClick={this.passToDone} className='result'>{`${task}${date}`}</div>
+                <div onClick={this.passToDone} className='result'>{`${task}\u00A0${date}`}</div>
                 <button onClick={this.delete} className="trash-button"></button>
             </li>)
     }
