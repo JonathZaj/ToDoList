@@ -114,9 +114,18 @@ class List extends React.Component {
         var month = this.monthSelect.value;
         var year = this.yearSelect.value;
         var input = this.textInput.value;
-
+        var ordinal = ""
+        if (day == 1) {
+            ordinal = 'st'
+        } else if (day == 2) {
+            ordinal = 'nd'
+        }
+        else if (day == 3) {
+            ordinal = "rd"
+        }
+        else { ordinal = "th" }
+        var date = ` on ${month}, ${day}${ordinal} ${year}`;
         var task = ` ${input}`
-        var date = ` On ${day}.${month}.${year}`;
         this.state.tasks.push(
             <li key={this.state.key + 1} className='list'>
                 <div onClick={this.passToDone} className='result'>{`${task}${date}`}</div>
