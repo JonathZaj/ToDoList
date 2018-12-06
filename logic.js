@@ -1,3 +1,32 @@
+var ToDoList = {}
+
+
+
+ToDoList.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+ToDoList.generateDays = function () {
+    ToDoList.days = [];
+    for (var i = 1; i <= 31; i++) {
+        ToDoList.days.push(i)
+    }
+    return ToDoList.day
+}
+
+ToDoList.generateYears = function () {
+    ToDoList.years = [];
+    for (var i = 2018; i <= 2050; i++) {
+        ToDoList.years.push(i)
+    }
+    return ToDoList.day
+}
+ToDoList.init = function () {
+    ToDoList.generateDays();
+    ToDoList.generateYears()
+}
+
+ToDoList.init()
+
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -49,26 +78,20 @@ class List extends React.Component {
         var year = this.yearSelect.value;
         var input = this.textInput.value;
 
-        var task = ` ${input}`     
-        var date= ` On ${day}.${month}.${year}`;
-        this.state.tasks.push(<li key={this.state.key + 1} className='list'><input type="checkbox"></input><div className='result'>{task}{date}</div></li>)
+        var task = ` ${input}`
+        var date = ` On ${day}.${month}.${year}`;
+        this.state.tasks.push(
+            <li key={this.state.key + 1} className='list'>
+                <button className = "trash-button"></button>
+                <div className='result'>{task}{date}</div>
+            </li>)
     }
+    renderOption(arr) {
+        return arr.map(
+            x => <option key={`item${x}`}>{x}</option>);
+    }
+
     render() {
-        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        var days = [];
-        var years = [];
-        for (var i = 1; i <= 31; i++) {
-            days.push(i)
-        }
-        for (var i = 2018; i <= 2050; i++) {
-            years.push(i)
-        }
-        var daysDropdown = days.map(
-            x => <option key={`item${x}`}>{x}</option>);
-        var monthsDropdown = months.map(
-            x => <option key={`item${x}`}>{x}</option>);
-        var yearsDropdown = years.map(
-            x => <option key={`item${x}`}>{x}</option>);
         return (
             <div className='tododone' >
                 <div className='todo'>
@@ -77,13 +100,13 @@ class List extends React.Component {
                     <div className='add'>
                         <input type='text' placeholder=" Something new ? Add a task" ref={(input) => { this.textInput = input; }} />
                         <select ref={(select) => { this.daySelect = select; }}>
-                            {daysDropdown}
+                            {this.renderOption(ToDoList.days)}
                         </select>
                         <select ref={(select) => { this.monthSelect = select; }}>
-                            {monthsDropdown}
+                            {this.renderOption(ToDoList.months)}
                         </select>
                         <select ref={(select) => { this.yearSelect = select; }}>
-                            {yearsDropdown}
+                            {this.renderOption(ToDoList.years)}
                         </select>
                         <button onClick={this.add}>Add</button><br />
                     </div>

@@ -116,3 +116,12 @@ input[type='checkbox']{
     display: flex;
     justify-content: space-around;
 }
+
+.trash-button{
+    background-image: url('https://img.icons8.com/metro/1600/empty-trash.png');
+    height: 32px;
+    width: 30px;
+    margin-left: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
