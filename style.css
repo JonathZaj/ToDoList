@@ -110,7 +110,7 @@ select{
     border-radius: 30px;
 }
 input[type='checkbox']{
-    width: 14px;
+    width: 15px;
 }
 .result{
     flex-direction: row;
@@ -123,7 +123,8 @@ input[type='checkbox']{
     background-image: url('https://img.icons8.com/metro/1600/empty-trash.png');
     height: 32px;
     width: 30px;
-    margin-left: 10px;
+    margin-right: 30px;
+    border-radius: 25%;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
 }

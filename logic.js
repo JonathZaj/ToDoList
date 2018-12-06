@@ -82,8 +82,9 @@ class List extends React.Component {
         var date = ` On ${day}.${month}.${year}`;
         this.state.tasks.push(
             <li key={this.state.key + 1} className='list'>
-                <button className = "trash-button"></button>
+                <input type='checkbox'></input>
                 <div className='result'>{task}{date}</div>
+                <button className = "trash-button"></button>
             </li>)
     }
     renderOption(arr) {
