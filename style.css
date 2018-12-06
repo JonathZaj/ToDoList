@@ -51,8 +51,8 @@ background-size:cover;
 .done{
     width: 102%;
     height: 31%;
-    border-top: 4px solid white;
-    overflow: hidden;
+    border-top: 1px black;
+    border-style: unset;
     overflow: scroll;
     
 }
@@ -127,4 +127,11 @@ input[type='checkbox']{
     border-radius: 25%;
     background-repeat: no-repeat;
     background-size: contain;
+}
+h2{
+    border: 1px solid white;
+    color: white;
+    background: black;
+    width: 190px;
+    margin: auto;
 }
