@@ -30,29 +30,54 @@ ToDoList.init()
 class App extends React.Component {
     constructor(props) {
         super(props);
+        this.modal = this.modal.bind(this)
+
+        this.state = {
+            display: 'none'
+        }
+    }
+    modal() {
+        if (this.state.display === 'none'){
+
+            this.setState({
+                display: ''
+
+            })
+        }else{this.setState({
+            display: 'none'
+
+        })
+
+        }
+
     }
     render() {
         return (
             <div className='todolist'>
-                <InputBar bgcolor='rgba(0,0,0,0.8)' text='MY TO DO LIST' font='white' source='https://image.shutterstock.com/image-illustration/todo-list-raster-pictogram-illustration-260nw-623169395.jpg' />
+                <NavBar bgcolor='rgba(0,0,0,0.8)' handleClick={this.modal} text='MY TO DO LIST' font='white' source='https://image.shutterstock.com/image-illustration/todo-list-raster-pictogram-illustration-260nw-623169395.jpg' source2='http://img.over-blog.com/231x300/3/89/36/53/point_d_interrogation-2bf4e1.png' />
                 <div className='container'>
-                    <List />
+                    <List display={this.state.display} rules={`Hello guys,here how to use our To Do List:\n 1-Write a task in the bar, choose a date and click on the button'Add' \n2-If you want to put your task in the done list(or put back in the to do list), click on the task.\n 3-If you want to remove a task, click on the trash.`} />
                 </div>
             </div>
         )
     }
 
 }
-class InputBar extends React.Component {
+class NavBar extends React.Component {
     constructor(props) {
         super(props);
+        this.display = this.display.bind(this)
+    }
+    display() {
+        this.props.handleClick()
     }
     render() {
 
         return (
-            <div className='InputBar' style={{ backgroundColor: this.props.bgcolor, color: this.props.font }}>
+            <div className='NavBar' style={{ backgroundColor: this.props.bgcolor, color: this.props.font }}>
                 <img src={this.props.source}></img>
                 <div>{this.props.text}</div>
+                <img onClick={this.display} src={this.props.source2}></img>
             </div>
         )
     }
@@ -71,7 +96,7 @@ class List extends React.Component {
             key: 0
         }
     }
-    delete(e){
+    delete(e) {
         e.target.parentElement.remove();
 
     }
@@ -141,17 +166,18 @@ class List extends React.Component {
         return (
             <div className='tododone' >
                 <div className='todo'>
+                    <div className='modal' style={{ display: this.props.display }}><p>{this.props.rules}</p></div>
                     <div>{this.props.day}</div>
                     <br />
                     <div className='add'>
                         <input type='text' placeholder=" Something new ? Add a task" ref={(input) => { this.textInput = input; }} />
-                        <select ref={(select) => { this.daySelect = select; }}>
+                        <select className='day' ref={(select) => { this.daySelect = select; }}>
                             {this.renderOption(ToDoList.days)}
                         </select>
-                        <select ref={(select) => { this.monthSelect = select; }}>
+                        <select className='month' ref={(select) => { this.monthSelect = select; }}>
                             {this.renderOption(ToDoList.months)}
                         </select>
-                        <select ref={(select) => { this.yearSelect = select; }}>
+                        <select className='month' ref={(select) => { this.yearSelect = select; }}>
                             {this.renderOption(ToDoList.years)}
                         </select>
                         <button onClick={this.add}>Add</button><br />
