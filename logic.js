@@ -63,11 +63,30 @@ class List extends React.Component {
         super(props);
         this.add = this.add.bind(this);
         this.passToDone = this.passToDone.bind(this);
+        this.delete = this.delete.bind(this);
         this.state = {
             tasks: [],
             doneTasks: [],
             key: 0
         }
+    }
+    delete(e){
+        e.target.parentElement.remove();
+
+    }
+    passToDo(e) {
+        var newDo = e.target.textContent;
+        e.target.parentElement.remove();
+        console.log(newDone)
+        this.setState({
+            tasks: this.state.tasks,
+            key: this.state.key + 1
+        })
+        this.state.tasks.push(
+            <li key={this.state.key + 1} className='list'>
+                <div onClick={this.passToDone} className='result' >{newDo}</div>
+                <button onClick={this.delete} className="trash-button"></button>
+            </li>)
     }
     passToDone(e) {
         var newDone = e.target.textContent;
@@ -80,8 +99,8 @@ class List extends React.Component {
 
         this.state.doneTasks.push(
             <li key={this.state.key + 1} className='list'>
-                <div className='result' >{newDone}</div>
-                <button className="trash-button"></button>
+                <div onClick={this.passToDo} className='result' >{newDone}</div>
+                <button onClick={this.delete} className="trash-button"></button>
             </li>)
     }
 
@@ -101,7 +120,7 @@ class List extends React.Component {
         this.state.tasks.push(
             <li key={this.state.key + 1} className='list'>
                 <div onClick={this.passToDone} className='result'>{`${task}${date}`}</div>
-                <button className="trash-button"></button>
+                <button onClick={this.delete} className="trash-button"></button>
             </li>)
     }
     renderOption(arr) {
@@ -130,7 +149,7 @@ class List extends React.Component {
                     </div>
                     <br />
                     <ul>
-                        {(this.state.isChecked) ? false : this.state.tasks}
+                        {this.state.tasks}
                     </ul>
                 </div>
                 <div className='done'>
