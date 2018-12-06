@@ -156,6 +156,7 @@ class List extends React.Component {
                 <div onClick={this.passToDone} className='result'>{`${task}\u00A0${date}`}</div>
                 <button onClick={this.delete} className="trash-button"></button>
             </li>)
+        this.textInput.value = "";
     }
     renderOption(arr) {
         return arr.map(
