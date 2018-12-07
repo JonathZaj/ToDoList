@@ -35,7 +35,7 @@ background-size:cover;
 }
 .todo{
     width: 102%;
-    height: 69%;
+    height: 55%;
     border: 1px solid grey;
     overflow: scroll;
 
@@ -50,7 +50,7 @@ background-size:cover;
 }
 .done{
     width: 102%;
-    height: 31%;
+    height: 45%;
     border-top: 1px black;
     border-style: unset;
     overflow: scroll;

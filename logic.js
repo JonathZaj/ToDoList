@@ -9,15 +9,14 @@ ToDoList.generateDays = function () {
     for (var i = 1; i <= 31; i++) {
         ToDoList.days.push(i)
     }
-    return ToDoList.day
 }
+
 
 ToDoList.generateYears = function () {
     ToDoList.years = [];
     for (var i = 2018; i <= 2050; i++) {
         ToDoList.years.push(i)
     }
-    return ToDoList.day
 }
 ToDoList.init = function () {
     ToDoList.generateDays();
@@ -61,14 +60,17 @@ class InputBar extends React.Component {
 class List extends React.Component {
     constructor(props) {
         super(props);
+        this.dayS = [];
         this.add = this.add.bind(this);
         this.passToDone = this.passToDone.bind(this);
         this.passToDo = this.passToDo.bind(this);
         this.delete = this.delete.bind(this);
+        this.changeDayList = this.changeDayList.bind(this);
         this.state = {
             tasks: [],
             doneTasks: [],
-            key: 0
+            key: 0,
+            days: ToDoList.days
         }
     }
     delete(e){
@@ -91,7 +93,6 @@ class List extends React.Component {
     passToDone(e) {
         var newDone = e.target.textContent;
         e.target.parentElement.remove();
-        console.log(newDone)
         this.setState({
             doneTasks: this.state.doneTasks,
             key: this.state.key + 1
@@ -136,6 +137,14 @@ class List extends React.Component {
     renderOption(arr) {
         return arr.map(
             x => <option key={`item${x}`}>{x}</option>);
+
+    }
+    changeDayList(){
+        var daysList = this.state.days;
+        ((this.monthSelect.value == "February") || (this.monthSelect.value == "April") || (this.monthSelect.value == "June") || (this.monthSelect.value == "September") || (this.monthSelect.value == "November")) ? daysList = ToDoList.days.slice(0, 30) : daysList = ToDoList.days;
+        this.setState({
+            days: daysList
+        })    
     }
 
     render() {
@@ -147,9 +156,9 @@ class List extends React.Component {
                     <div className='add'>
                         <input type='text' placeholder=" Something new ? Add a task" ref={(input) => { this.textInput = input; }} />
                         <select ref={(select) => { this.daySelect = select; }}>
-                            {this.renderOption(ToDoList.days)}
+                            {this.renderOption(this.state.days)}
                         </select>
-                        <select ref={(select) => { this.monthSelect = select; }}>
+                        <select onChange={this.changeDayList} ref={(select) => { this.monthSelect = select; }}>
                             {this.renderOption(ToDoList.months)}
                         </select>
                         <select ref={(select) => { this.yearSelect = select; }}>
