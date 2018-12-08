@@ -37,16 +37,17 @@ class App extends React.Component {
         }
     }
     modal() {
-        if (this.state.display === 'none'){
+        if (this.state.display === 'none') {
 
             this.setState({
                 display: ''
 
             })
-        }else{this.setState({
-            display: 'none'
+        } else {
+            this.setState({
+                display: 'none'
 
-        })
+            })
 
         }
 
@@ -90,6 +91,7 @@ class List extends React.Component {
         this.passToDone = this.passToDone.bind(this);
         this.passToDo = this.passToDo.bind(this);
         this.delete = this.delete.bind(this);
+        this.addOnEnter = this.addOnEnter.bind(this);
         this.state = {
             tasks: [],
             doneTasks: [],
@@ -127,6 +129,11 @@ class List extends React.Component {
                 <div onClick={this.passToDo} className='result' >{newDone}</div>
                 <button onClick={this.delete} className="trash-button"></button>
             </li>)
+    }
+    addOnEnter(e) {
+        if (e.key == 'Enter') {
+            this.add();
+        }
     }
 
     add() {
@@ -171,7 +178,7 @@ class List extends React.Component {
                     <div>{this.props.day}</div>
                     <br />
                     <div className='add'>
-                        <input type='text' placeholder=" Something new ? Add a task" ref={(input) => { this.textInput = input; }} />
+                        <input onKeyPress={this.addOnEnter} type='text' placeholder=" Something new ? Add a task" ref={(input) => { this.textInput = input; }} />
                         <select className='day' ref={(select) => { this.daySelect = select; }}>
                             {this.renderOption(ToDoList.days)}
                         </select>
