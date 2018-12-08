@@ -9,15 +9,14 @@ ToDoList.generateDays = function () {
     for (var i = 1; i <= 31; i++) {
         ToDoList.days.push(i)
     }
-    return ToDoList.day
 }
+
 
 ToDoList.generateYears = function () {
     ToDoList.years = [];
     for (var i = 2018; i <= 2050; i++) {
         ToDoList.years.push(i)
     }
-    return ToDoList.day
 }
 ToDoList.init = function () {
     ToDoList.generateDays();
@@ -57,7 +56,7 @@ class App extends React.Component {
             <div className='todolist'>
                 <NavBar bgcolor='rgba(0,0,0,0.8)' handleClick={this.modal} text='MY TO DO LIST' font='white' source='https://image.shutterstock.com/image-illustration/todo-list-raster-pictogram-illustration-260nw-623169395.jpg' source2='http://img.over-blog.com/231x300/3/89/36/53/point_d_interrogation-2bf4e1.png' />
                 <div className='container'>
-                    <List display={this.state.display} rules={`Hello guys,\nhere how to use our To Do List:\n 1-Write a task in the bar, choose a date and click on the button'Add' \n2-If you want to put your task in the done list(or put back in the to do list), click on the task.\n 3-If you want to remove a task, click on the trash.`} />
+                    <List display={this.state.display} rules={`Hello guys,\nhere how to use our To Do List:\n 1-Write a task in the bar, choose a date and click on the button'Add' \n2-If you want to put your task in the done list(or put back in the to do list), click on the task.\n 3-If you want to remove a task, click on the trash. \n 4-To close this window , click on the '?'`} />
                 </div>
             </div>
         )
@@ -87,15 +86,18 @@ class NavBar extends React.Component {
 class List extends React.Component {
     constructor(props) {
         super(props);
+        this.dayS = [];
         this.add = this.add.bind(this);
         this.passToDone = this.passToDone.bind(this);
         this.passToDo = this.passToDo.bind(this);
         this.delete = this.delete.bind(this);
         this.addOnEnter = this.addOnEnter.bind(this);
+        this.changeDayList = this.changeDayList.bind(this);
         this.state = {
             tasks: [],
             doneTasks: [],
-            key: 0
+            key: 0,
+            days: ToDoList.days
         }
     }
     delete(e) {
@@ -118,7 +120,6 @@ class List extends React.Component {
     passToDone(e) {
         var newDone = e.target.textContent;
         e.target.parentElement.remove();
-        console.log(newDone)
         this.setState({
             doneTasks: this.state.doneTasks,
             key: this.state.key + 1
@@ -168,6 +169,27 @@ class List extends React.Component {
     renderOption(arr) {
         return arr.map(
             x => <option key={`item${x}`}>{x}</option>);
+
+    }
+    changeDayList() {
+        var daysList = this.state.days;
+        if (this.monthSelect.value == "February") {
+            if (parseInt(this.yearSelect.value) % 4 == 0) {
+                daysList = ToDoList.days.slice(0, 29);
+            }
+            else {
+                daysList = ToDoList.days.slice(0, 28);
+            }
+        }
+        else if ((this.monthSelect.value == "April") || (this.monthSelect.value == "June") || (this.monthSelect.value == "September") || (this.monthSelect.value == "November")) {
+            daysList = ToDoList.days.slice(0, 30)
+        }
+        else {
+            daysList = ToDoList.days
+        }
+        this.setState({
+            days: daysList
+        })
     }
 
     render() {
@@ -179,13 +201,13 @@ class List extends React.Component {
                     <br />
                     <div className='add'>
                         <input onKeyPress={this.addOnEnter} type='text' placeholder=" Something new ? Add a task" ref={(input) => { this.textInput = input; }} />
-                        <select className='day' ref={(select) => { this.daySelect = select; }}>
-                            {this.renderOption(ToDoList.days)}
+                        <select ref={(select) => { this.daySelect = select; }}>
+                            {this.renderOption(this.state.days)}
                         </select>
-                        <select className='month' ref={(select) => { this.monthSelect = select; }}>
+                        <select onChange={this.changeDayList} ref={(select) => { this.monthSelect = select; }}>
                             {this.renderOption(ToDoList.months)}
                         </select>
-                        <select className='month' ref={(select) => { this.yearSelect = select; }}>
+                        <select onChange={this.changeDayList} ref={(select) => { this.yearSelect = select; }}>
                             {this.renderOption(ToDoList.years)}
                         </select>
                         <button onClick={this.add}>Add</button><br />

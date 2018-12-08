@@ -93,6 +93,7 @@
     height: 30px;
     width: 70px;
     border-radius: 5px;
+    cursor: pointer;
 }
 li{
     list-style-type: none;
@@ -124,6 +125,7 @@ input[type='checkbox']{
     width: 100%;
     display: flex;
     justify-content: space-between;
+    cursor: pointer;
 }
 
 .trash-button{
@@ -134,6 +136,7 @@ input[type='checkbox']{
     border-radius: 25%;
     background-repeat: no-repeat;
     background-size: contain;
+    cursor: pointer;
 }
 h2{
     border: 1px solid white;
