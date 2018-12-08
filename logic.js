@@ -36,16 +36,17 @@ class App extends React.Component {
         }
     }
     modal() {
-        if (this.state.display === 'none'){
+        if (this.state.display === 'none') {
 
             this.setState({
                 display: ''
 
             })
-        }else{this.setState({
-            display: 'none'
+        } else {
+            this.setState({
+                display: 'none'
 
-        })
+            })
 
         }
 
@@ -164,12 +165,25 @@ class List extends React.Component {
             x => <option key={`item${x}`}>{x}</option>);
 
     }
-    changeDayList(){
+    changeDayList() {
         var daysList = this.state.days;
-        ((this.monthSelect.value == "February") || (this.monthSelect.value == "April") || (this.monthSelect.value == "June") || (this.monthSelect.value == "September") || (this.monthSelect.value == "November")) ? daysList = ToDoList.days.slice(0, 30) : daysList = ToDoList.days;
+        if (this.monthSelect.value == "February") {
+            if (parseInt(this.yearSelect.value) % 4 == 0) {
+                daysList = ToDoList.days.slice(0, 29);
+            }
+            else {
+                daysList = ToDoList.days.slice(0, 28);
+            }
+        }
+        else if ((this.monthSelect.value == "April") || (this.monthSelect.value == "June") || (this.monthSelect.value == "September") || (this.monthSelect.value == "November")) {
+            daysList = ToDoList.days.slice(0, 30)
+        }
+        else {
+            daysList = ToDoList.days
+        }
         this.setState({
             days: daysList
-        })    
+        })
     }
 
     render() {
@@ -187,7 +201,7 @@ class List extends React.Component {
                         <select onChange={this.changeDayList} ref={(select) => { this.monthSelect = select; }}>
                             {this.renderOption(ToDoList.months)}
                         </select>
-                        <select className='month' ref={(select) => { this.yearSelect = select; }}>
+                        <select onChange={this.changeDayList} ref={(select) => { this.yearSelect = select; }}>
                             {this.renderOption(ToDoList.years)}
                         </select>
                         <button onClick={this.add}>Add</button><br />
